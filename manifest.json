@@ -1,0 +1,64 @@
+{
+	"manifest_version": 2,
+	"name": "SupremeBot",
+	"description": "Created by Matthi",
+	"icons": {
+		"128": "icon.png"
+	},
+	"version": "4.2",
+
+	"background": 
+	{
+		"scripts": ["./js/background.js"]
+	},
+	
+	"content_scripts": [
+		{
+			"matches": ["https://www.supremenewyork.com/*"],
+			"exclude_matches": ["https://www.supremenewyork.com/shop/all/*","https://www.supremenewyork.com/shop/new","https://www.supremenewyork.com/shop/*/*/*","https://www.supremenewyork.com/shop","https://www.supremenewyork.com/checkout"],
+			"js": ["./js/default.js"],
+			"css": ["./css/whatItDoes.css"],
+			"run_at": "document_idle"
+		},		
+		{
+			"matches": ["https://www.supremenewyork.com/shop/all/*","https://www.supremenewyork.com/shop/new"],
+			"js": ["./js/searchItems.js"],
+			"css": ["./css/whatItDoes.css"],
+			"run_at": "document_idle"
+		},
+		{
+			"matches": ["https://www.supremenewyork.com/shop/*/*/*"],
+			"js": ["./js/selectSizeAndNext.js"],
+			"css": ["./css/whatItDoes.css"],
+			"run_at": "document_idle"
+		},
+		{
+			"matches": ["https://www.supremenewyork.com/shop"],
+			"js": ["./js/checkout.js"],
+			"css": ["./css/whatItDoes.css"],
+			"run_at": "document_idle"
+		},
+		{
+			"matches": ["https://www.supremenewyork.com/checkout"],
+			"js": ["./js/processPayment.js"],
+			"css": ["./css/whatItDoes.css"],
+			"run_at": "document_idle"
+		}
+
+	],
+	
+	"permissions": [
+		"tabs", 
+		"http://*/*", 
+		"https://*/*",
+		"contentSettings", 
+		"cookies",
+		"management"
+	],
+	
+	"browser_action": {
+		"default_title": "SupremeBot By Matthi",
+		"default_icon": "icon.png",
+		"default_popup": "./html/popup.html"
+	}
+}
