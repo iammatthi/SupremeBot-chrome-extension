@@ -1,5 +1,5 @@
 ﻿let start = new Date();
-chrome.runtime.sendMessage("get enabled, counter, names and colors", function(response) {
+chrome.runtime.sendMessage("get enabled, counter, names and colors", function (response) {
     let enabled = response[0];
     if (enabled) {
         chrome.runtime.sendMessage({
@@ -80,7 +80,7 @@ chrome.runtime.sendMessage("get enabled, counter, names and colors", function(re
                 } else {
                     div.innerHTML = "Item " + counter + " not founded";
                     if (counter == 1) {
-                        chrome.runtime.sendMessage("get autoRefresh", function(response) {
+                        chrome.runtime.sendMessage("get autoRefresh", function (response) {
                             let autoRefresh = response;
                             if (!autoRefresh) {
                                 chrome.runtime.sendMessage({
@@ -120,21 +120,21 @@ chrome.runtime.sendMessage("get enabled, counter, names and colors", function(re
         function toCleanString(str) {
             return str.toLowerCase().replace(/[\u200B-\u200D\uFEFF]/g, '');
         }
-		
-		function getTimeToString(time) {
-			if(time == null) {
-				time = new Date();
-			}
-			let strHours = "" + time.getHours();
-			let strMinutes = "" + time.getMinutes();
-			let strSeconds = "" + time.getSeconds();
-			let strMilliseconds = "" + time.getMilliseconds();
-			let path = "00"
-			let pathMill = "000";
-			return path.substring(0, path.length - strHours.length) + strHours + ":" 
-			+ path.substring(0, path.length - strMinutes.length) + strMinutes + ":" 
-			+ path.substring(0, path.length - strSeconds.length) + strSeconds + "."
-			+ pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
-		}
+
+        function getTimeToString(time) {
+            if (time == null) {
+                time = new Date();
+            }
+            let strHours = "" + time.getHours();
+            let strMinutes = "" + time.getMinutes();
+            let strSeconds = "" + time.getSeconds();
+            let strMilliseconds = "" + time.getMilliseconds();
+            let path = "00"
+            let pathMill = "000";
+            return path.substring(0, path.length - strHours.length) + strHours + ":" +
+                path.substring(0, path.length - strMinutes.length) + strMinutes + ":" +
+                path.substring(0, path.length - strSeconds.length) + strSeconds + "." +
+                pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
+        }
     }
 });

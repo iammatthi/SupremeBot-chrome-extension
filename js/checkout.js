@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage("get enabled, started, counter, itemsCount, sites and itemsInBag", function(response) {
+chrome.runtime.sendMessage("get enabled, started, counter, itemsCount, sites and itemsInBag", function (response) {
     let enabled = response[0];
     if (enabled) {
         let div = document.createElement("div");
@@ -28,7 +28,7 @@ chrome.runtime.sendMessage("get enabled, started, counter, itemsCount, sites and
                         value: true
                     });
                     window.open('https://www.supremenewyork.com/checkout', '_self');
-                    
+
                 } else {
                     div.innerHTML = "The bag is empty";
                     chrome.runtime.sendMessage({

@@ -14,9 +14,9 @@ let started = false;
 let autoRefresh = false;
 let processPaymentReload = false;
 
-isActive().then(function(response) {
+isActive().then(function (response) {
     if (response) {
-        chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             if (request == "get enabled, started, counter, itemsCount, sites and itemsInBag") {
                 sendResponse([enabled, started, counter, names.length, getSites(types), itemsInBag]);
             } else if (request == "get enabled, started, counter, sizes, itemsCount and colorFounded") {
@@ -30,14 +30,14 @@ isActive().then(function(response) {
             } else if (request == "get enabled") {
                 sendResponse(enabled);
             } else if (request == "get isActive") {
-                isActive().then(function(response) {
+                isActive().then(function (response) {
                     sendResponse(response);
                 });
                 return true; //this will keep the message channel open to the other end until sendResponse is called
             } else if (request == "get itemsCount, names, colors, types, sizes, delay and enabled") {
                 sendResponse([names.length, names, colors, types, sizes, delay, enabled]);
             } else if (request.msg == "save") {
-                isActive().then(function(response) {
+                isActive().then(function (response) {
                     if (response) {
                         let resp = false;
                         if (request.save || (!request.save && confirm("There are fields not filled in, do you want to save anyway?"))) {
@@ -77,7 +77,7 @@ isActive().then(function(response) {
                     chrome.tabs.query({
                         active: true,
                         currentWindow: true
-                    }, function(tabs) {
+                    }, function (tabs) {
                         chrome.tabs.update(tabs[0].id, {
                             url: tabs[0].url
                         });
@@ -87,7 +87,7 @@ isActive().then(function(response) {
                 }
             } else if (request.from === 'enabled') {
                 enabled = request.value;
-                isActive().then(function(response) {
+                isActive().then(function (response) {
                     if (response) {
                         if (!enabled) {
                             resetvars();
@@ -125,11 +125,11 @@ function getSites(types) {
 }
 
 function isActive() {
-    let promise = new Promise(function(resolve, reject) {
+    let promise = new Promise(function (resolve, reject) {
         chrome.cookies.get({
             "url": 'https://www.supremenewyork.com/',
             "name": 'sbauthentication'
-        }, function(cookie) {
+        }, function (cookie) {
             if (cookie !== null && cookie.value === "premiumuser") {
                 deadline = 1735686000000; //01.01.2025 00:00:00
             } else {
@@ -157,7 +157,7 @@ function isActive() {
 
 function setJavascriptAllowed(allowed) {
     console.log(allowed);
-    if(allowed) {
+    if (allowed) {
         chrome.contentSettings['javascript'].set({
             primaryPattern: 'https://www.supremenewyork.com/*',
             setting: "allow"
@@ -185,17 +185,17 @@ function splitArray(array) { //split when ","
 }
 
 function getTimeToString(time) {
-	if(time == null) {
-		time = new Date();
-	}
-	let strHours = "" + time.getHours();
-	let strMinutes = "" + time.getMinutes();
-	let strSeconds = "" + time.getSeconds();
-	let strMilliseconds = "" + time.getMilliseconds();
-	let path = "00"
-	let pathMill = "000";
-	return path.substring(0, path.length - strHours.length) + strHours + ":" 
-	+ path.substring(0, path.length - strMinutes.length) + strMinutes + ":" 
-	+ path.substring(0, path.length - strSeconds.length) + strSeconds + "."
-	+ pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
+    if (time == null) {
+        time = new Date();
+    }
+    let strHours = "" + time.getHours();
+    let strMinutes = "" + time.getMinutes();
+    let strSeconds = "" + time.getSeconds();
+    let strMilliseconds = "" + time.getMilliseconds();
+    let path = "00"
+    let pathMill = "000";
+    return path.substring(0, path.length - strHours.length) + strHours + ":" +
+        path.substring(0, path.length - strMinutes.length) + strMinutes + ":" +
+        path.substring(0, path.length - strSeconds.length) + strSeconds + "." +
+        pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
 }

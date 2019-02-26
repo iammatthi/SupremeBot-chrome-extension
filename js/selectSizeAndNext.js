@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and colorFounded", function(response) {
+chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and colorFounded", function (response) {
     let enabled = response[0];
     if (enabled) {
         let div = document.createElement("div");
@@ -53,7 +53,7 @@ chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and
                         window.open("http://www.supremenewyork.com/shop", '_self');
                     } else {
                         div.innerHTML = "Color not founded." + "<br>" + "Select the color, the size and press ENTER";
-                        window.onkeyup = function(e) {
+                        window.onkeyup = function (e) {
                             let key = e.keyCode ? e.keyCode : e.which;
                             if (key == 13) {
                                 addToBasket();
@@ -66,7 +66,7 @@ chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and
                         window.open("http://www.supremenewyork.com/shop", '_self');
                     } else {
                         div.innerHTML = "Size not founded." + "<br>" + "Select the size and press ENTER";
-                        window.onkeyup = function(e) {
+                        window.onkeyup = function (e) {
                             let key = e.keyCode ? e.keyCode : e.which;
                             if (key == 13) {
                                 addToBasket();
@@ -89,7 +89,7 @@ chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and
                     chrome.runtime.sendMessage({
                         from: 'time',
                         subject: 'set',
-                        value: getTimeToString() +"  -  Add to basket"
+                        value: getTimeToString() + "  -  Add to basket"
                     });
                     document.querySelectorAll("input.button")[0].click(); //add to basket
                 }
@@ -98,22 +98,22 @@ chrome.runtime.sendMessage("get enabled, started, counter, sizes, itemsCount and
             function toCleanString(str) {
                 return str.toLowerCase().replace(/[\u200B-\u200D\uFEFF]/g, '');
             }
-			
-			function getTimeToString(time) {
-				if(time == null) {
-					time = new Date();
-				}
-				let strHours = "" + time.getHours();
-				let strMinutes = "" + time.getMinutes();
-				let strSeconds = "" + time.getSeconds();
-				let strMilliseconds = "" + time.getMilliseconds();
-				let path = "00"
-				let pathMill = "000";
-				return path.substring(0, path.length - strHours.length) + strHours + ":" 
-				+ path.substring(0, path.length - strMinutes.length) + strMinutes + ":" 
-				+ path.substring(0, path.length - strSeconds.length) + strSeconds + "."
-				+ pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
-			}
+
+            function getTimeToString(time) {
+                if (time == null) {
+                    time = new Date();
+                }
+                let strHours = "" + time.getHours();
+                let strMinutes = "" + time.getMinutes();
+                let strSeconds = "" + time.getSeconds();
+                let strMilliseconds = "" + time.getMilliseconds();
+                let path = "00"
+                let pathMill = "000";
+                return path.substring(0, path.length - strHours.length) + strHours + ":" +
+                    path.substring(0, path.length - strMinutes.length) + strMinutes + ":" +
+                    path.substring(0, path.length - strSeconds.length) + strSeconds + "." +
+                    pathMill.substring(0, pathMill.length - strMilliseconds.length) + strMilliseconds;
+            }
         }
     }
 });

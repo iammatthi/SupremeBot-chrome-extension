@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage("get isActive", function(response) {
+chrome.runtime.sendMessage("get isActive", function (response) {
     if (response) {
         let typesList = [
             ["jackets", "Jackets"],
@@ -97,7 +97,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             ]
         ];
 
-        chrome.runtime.sendMessage("get itemsCount, names, colors, types, sizes, delay and enabled", function(response) {
+        chrome.runtime.sendMessage("get itemsCount, names, colors, types, sizes, delay and enabled", function (response) {
             createMain();
             let itemsCount = parseInt(response[0]);
             for (let i = 0; i < itemsCount; i++) {
@@ -130,11 +130,11 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             let event = new Event('change');
             inputCheckbox.dispatchEvent(event);
 
-            document.getElementById("add").onclick = function() {
+            document.getElementById("add").onclick = function () {
                 createNewItem();
             }
 
-            document.getElementById("save").onclick = function() {
+            document.getElementById("save").onclick = function () {
                 /******* names *******/
                 let names = document.querySelectorAll("input.name");
                 let result = [];
@@ -192,10 +192,10 @@ chrome.runtime.sendMessage("get isActive", function(response) {
                     msg: "save",
                     save: allEntered,
                     value: [names, colors, types, sizes, delay]
-                }, function(response) {
+                }, function (response) {
                     if (response) {
                         document.getElementById("result").textContent = "Saved";
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.getElementById("result").textContent = "";
                         }, 2000);
                     }
@@ -216,7 +216,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             let btnAdd = document.createElement("button");
             btnAdd.id = "add";
             btnAdd.innerHTML = "Add new item";
-            btnAdd.onmouseover = function() {
+            btnAdd.onmouseover = function () {
                 btnAdd.style.cursor = "pointer";
             }
             document.body.appendChild(btnAdd);
@@ -239,10 +239,10 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             input.type = "number";
             input.step = "100";
             input.min = "0";
-            input.onkeydown = function() {
+            input.onkeydown = function () {
                 return false;
             };
-            input.onmouseover = function() {
+            input.onmouseover = function () {
                 input.style.cursor = "default";
             }
             label.appendChild(span);
@@ -254,7 +254,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             let btnSave = document.createElement("button");
             btnSave.id = "save";
             btnSave.innerHTML = "Save";
-            btnSave.onmouseover = function() {
+            btnSave.onmouseover = function () {
                 btnSave.style.cursor = "pointer";
             }
             document.body.appendChild(btnSave);
@@ -275,7 +275,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             checkboxEnabledDisabled.type = "checkbox";
             checkboxEnabledDisabled.name = "checkboxEnabledDisabled";
             checkboxEnabledDisabled.className = "checkboxEnabledDisabled";
-            checkboxEnabledDisabled.onchange = function() {
+            checkboxEnabledDisabled.onchange = function () {
                 let span = document.getElementById("spanEnabledDisabled");
                 chrome.runtime.sendMessage({
                     from: 'enabled',
@@ -288,7 +288,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
                     span.textContent = "Disabled";
                 }
             };
-            checkboxEnabledDisabled.onmouseover = function() {
+            checkboxEnabledDisabled.onmouseover = function () {
                 checkboxEnabledDisabled.style.cursor = "pointer";
             }
             let spanEnabledDisabled = document.createElement("span");
@@ -314,10 +314,10 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             let div = document.createElement("div");
             div.innerHTML = "x";
             div.className = "close";
-            div.onmouseover = function() {
+            div.onmouseover = function () {
                 div.style.cursor = "pointer";
             }
-            div.onclick = function() {
+            div.onclick = function () {
                 document.getElementById("mainDiv").removeChild(newItem);
             }
             newItem.appendChild(div);
@@ -358,7 +358,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             span.textContent = "Type: ";
             let selType = document.createElement('select');
             selType.id = "type";
-            selType.onchange = function() {
+            selType.onchange = function () {
                 sizesSelect(selType, selSize, labelSize);
             }
             selType.className = "type";
@@ -374,7 +374,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
                 opt.innerHTML = typesList[i][1];
                 selType.appendChild(opt);
             }
-            selType.onmouseover = function() {
+            selType.onmouseover = function () {
                 selType.style.cursor = "pointer";
             }
             label.appendChild(span);
@@ -395,7 +395,7 @@ chrome.runtime.sendMessage("get isActive", function(response) {
             opt.value = "";
             opt.selected = "selected";
             selSize.appendChild(opt);
-            selSize.onmouseover = function() {
+            selSize.onmouseover = function () {
                 selSize.style.cursor = "pointer";
             }
             labelSize.appendChild(span);

@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage("get enabled", function(response) {
+chrome.runtime.sendMessage("get enabled", function (response) {
     let enabled = response;
     if (enabled) {
         let div = document.createElement("div");
